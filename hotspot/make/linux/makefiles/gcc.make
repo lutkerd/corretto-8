@@ -158,6 +158,7 @@ ifeq ($(USE_CLANG),)
   # except 4.1.2 gives pointless warnings that can't be disabled (afaik)
   ifneq "$(shell expr \( $(CC_VER_MAJOR) \> 4 \) \| \( \( $(CC_VER_MAJOR) = 4 \) \& \( $(CC_VER_MINOR) \>= 3 \) \))" "0"
     CFLAGS += -fvisibility=hidden
+    CXXFLAGS += -std=gnu++98
   endif
 else
   CFLAGS += -fvisibility=hidden

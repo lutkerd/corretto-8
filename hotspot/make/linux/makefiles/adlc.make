@@ -19,7 +19,7 @@
 # Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
 # or visit www.oracle.com if you need additional information or have any
 # questions.
-#  
+#
 #
 
 # This makefile (adlc.make) is included from the adlc.make in the
@@ -37,15 +37,15 @@ OUTDIR  = $(GENERATED)/adfiles
 ARCH = $(Platform_arch)
 OS = $(Platform_os_family)
 
-SOURCE.AD = $(OUTDIR)/$(OS)_$(Platform_arch_model).ad 
+SOURCE.AD = $(OUTDIR)/$(OS)_$(Platform_arch_model).ad
 
 ifeq ("${Platform_arch_model}", "${Platform_arch}")
   SOURCES.AD = \
-  $(call altsrc-replace,$(HS_COMMON_SRC)/cpu/$(ARCH)/vm/$(Platform_arch_model).ad) 
+  $(call altsrc-replace,$(HS_COMMON_SRC)/cpu/$(ARCH)/vm/$(Platform_arch_model).ad)
 else
   SOURCES.AD = \
   $(call altsrc-replace,$(HS_COMMON_SRC)/cpu/$(ARCH)/vm/$(Platform_arch_model).ad) \
-  $(call altsrc-replace,$(HS_COMMON_SRC)/cpu/$(ARCH)/vm/$(Platform_arch).ad) 
+  $(call altsrc-replace,$(HS_COMMON_SRC)/cpu/$(ARCH)/vm/$(Platform_arch).ad)
 endif
 
 EXEC	= $(OUTDIR)/adlc
@@ -61,8 +61,13 @@ INCLUDES += $(Src_Dirs_I:%=-I%)
 # set flags for adlc compilation
 CXXFLAGS = $(SYSDEFS) $(INCLUDES)
 
+#ifeq ($(USE_CLANG),)
+	# Force C++98
+	CXXFLAGS += -std=gnu++98
+#endif
+
+
 # Force assertions on.
-CXXFLAGS += -DASSERT
 
 # CFLAGS_WARN holds compiler options to suppress/enable warnings.
 # Compiler warnings are treated as errors
