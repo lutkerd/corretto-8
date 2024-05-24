@@ -101,7 +101,7 @@ final class SSLConfiguration implements Cloneable {
 
     // Respond a close_notify alert if receiving close_notify alert.
     static final boolean acknowledgeCloseNotify  = Utilities.getBooleanProperty(
-            "jdk.tls.acknowledgeCloseNotify", false);
+            "jdk.tls.acknowledgeCloseNotify", true);
 
     // Set the max size limit for Handshake Message to 2^15
     static final int maxHandshakeMessageSize = AccessController.doPrivileged(
